@@ -1,0 +1,122 @@
+version: 2
+
+variables:
+  - go_container: &go_container circleci/golang:1.12.5
+  - context: &context org-global
+  - working_directory: &working_directory /go/src/github.com/bharathts07/pokke
+  - cache_tag: &cache_tag go-mod-{{ checksum "go.sum" }}
+
+defaults: &defaults
+  working_directory: *working_directory
+
+all: &all
+  filters:
+    branches:
+      only: /.*/
+    tags:
+      only: /.*/
+
+onlymaster: &onlymaster
+  filters:
+    branches:
+      only: master
+    tags:
+      only: /.*/
+
+golang: &golang
+  <<: *defaults
+  docker:
+    - image: *go_container
+      environment:
+        GO111MODULE: "on"
+
+golang_test: &golang_test
+  <<: *defaults
+  docker:
+    - image: *go_container
+      environment:
+        GO111MODULE: "on"
+    # multiple container images on common network can be added here
+
+netrc: &netrc
+  name: Setup Github Token for fetching codes from private repositories
+  command: |
+    echo "machine github.com login ${GITHUB_TOKEN}" > ~/.netrc
+
+jobs:
+  build:
+    <<: *golang
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - *cache_tag
+      - run:
+          name: Get project dependencies
+          command: |
+            go mod download
+            make dependencies
+      - save_cache:
+          key: *cache_tag
+          paths:
+            - /go/pkg/mod
+      - run:
+          name: Build application
+          command: |
+            make build
+
+  test:
+    <<: *golang_test
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - *cache_tag
+      - run:
+          name: Run test and collect coverages
+          command: |
+            make coverage
+      - run:
+          name: Upload coverages to codecov
+          command: |
+            bash <(curl -s https://codecov.io/bash)
+          when: always
+
+  build-push:
+    <<: *golang
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - *cache_tag
+      - run:
+          name: Get project dependencies
+          command: |
+            go mod download
+            make dependencies
+      - run:
+          name: Build and push docker image
+          command: |
+            make container
+            make push-container
+
+workflows:
+  version: 2
+  build-test-push:
+    jobs:
+      - build:
+          context: *context
+          <<: *all
+
+      - test:
+          context: *context
+          <<: *all
+          requires:
+            - build
+
+      - build-push:
+          <<: *onlymaster
+          context: *context
+          requires:
+            - build
+            - test
