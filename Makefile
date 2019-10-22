@@ -3,6 +3,11 @@ VERSION ?= commit-$(GIT_REF)
 
 SERVICE_NAME := $(shell grep "^module" go.mod | rev | cut -d "/" -f1 | rev)
 
+
+GCR_PROJECT := pokke
+REGISTRY := gcr.io/$(GCR_PROJECT)
+IMAGE := $(REGISTRY)/$(SERVICE_NAME):$(VERSION)
+
 .PHONY: build
 build: build/server
 
@@ -22,3 +27,13 @@ unit-test:
 mockgenerate:
 	@echo "Generating mock for HomeData update service"
 	mockgen -source=./database/interface.go -destination=./database/mock.go
+
+# GITHUB_TOKEN needed if the image needs to be pulled from a private repository
+.PHONY: container
+container:
+	@docker build -t $(IMAGE) \
+		--build-arg GITHUB_TOKEN=$(GITHUB_TOKEN) \
+		--build-arg VERSION=$(VERSION) \
+		--build-arg SERVICE_NAME=$(SERVICE_NAME) \
+		--file docker/server/Dockerfile \
+		.
