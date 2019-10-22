@@ -6,7 +6,10 @@ SERVICE_NAME := $(shell grep "^module" go.mod | rev | cut -d "/" -f1 | rev)
 
 GCR_PROJECT := pokke
 REGISTRY := gcr.io/$(GCR_PROJECT)
-IMAGE := $(REGISTRY)/$(SERVICE_NAME):$(VERSION)
+# For use in cloudbuild if necessary
+GCR_IMAGE_NAME := $(REGISTRY)/$(SERVICE_NAME):$(VERSION)
+# For pushing built docker images to public docker hub
+DOCKER_HUB_IMAGE := bharathts07/$(SERVICE_NAME):$(VERSION)
 
 .PHONY: build
 build: build/server
@@ -31,9 +34,14 @@ mockgenerate:
 # GITHUB_TOKEN needed if the image needs to be pulled from a private repository
 .PHONY: container
 container:
-	@docker build -t $(IMAGE) \
+	@docker build -t $(DOCKER_HUB_IMAGE) \
 		--build-arg GITHUB_TOKEN=$(GITHUB_TOKEN) \
 		--build-arg VERSION=$(VERSION) \
 		--build-arg SERVICE_NAME=$(SERVICE_NAME) \
 		--file docker/server/Dockerfile \
 		.
+
+# This requires `docker login`
+.PHONY: push-container
+push-container:
+	@docker push $(DOCKER_HUB_IMAGE)
