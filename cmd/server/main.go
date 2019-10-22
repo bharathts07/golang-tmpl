@@ -1,13 +1,21 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"os"
+
+	"github.com/bharathts07/pokke/cmd/server/realmain"
+)
+
+// version is git commit at the time of build of this service binary. version is overwritten by -ldflags
+// while building.
+var version string
+
+// serviceName is service name of this microservices. serviceName
+// is overwritten using -ldflags while building.
+var serviceName string
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+	_, _ = fmt.Fprintf(os.Stdout, "[INFO] Starting service %s at git commit %s:\n",serviceName,version)
+	os.Exit(realmain.Execute(os.Args))
 }
