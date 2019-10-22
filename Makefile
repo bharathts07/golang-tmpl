@@ -29,7 +29,7 @@ unit-test:
 .PHONY: mockgenerate
 mockgenerate:
 	@echo "Generating mock for HomeData update service"
-	mockgen -source=./database/interface.go -destination=./database/mock.go
+	mockgen -source=./database/interface.go -destination=./database/mock.go --package=database
 
 # GITHUB_TOKEN needed if the image needs to be pulled from a private repository
 .PHONY: container
@@ -45,3 +45,13 @@ container:
 .PHONY: push-container
 push-container:
 	@docker push $(DOCKER_HUB_IMAGE)
+
+.PHONY: dependencies
+dependencies:
+	@go mod tidy
+
+.PHONY: coverage
+coverage:
+# 	https://www.ory.sh/golang-go-code-coverage-accurate
+	@go install	github.com/ory/go-acc
+	@go-acc $(shell go list ./...)
