@@ -7,7 +7,7 @@ import (
 
 func GetHome(c *gin.Context) {
 	data := models.Home{
-		Layout: models.HomeLayout{
+		Layout: models.Layout{
 			Alignment:    "Center",
 			Order:        models.OrderMap{},
 			ComponentIDs: nil,
