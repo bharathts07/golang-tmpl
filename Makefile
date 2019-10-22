@@ -18,3 +18,7 @@ test: unit-test
 unit-test:
 	@go test -count=1 -race -v $(shell go list ./...)
 
+.PHONY: mockgenerate
+mockgenerate:
+	@echo "Generating mock for HomeData update service"
+	mockgen -source=./database/interface.go -destination=./database/mock.go
