@@ -1,7 +1,7 @@
 package models
 
-// HomeLayout return information regarding the general display order of different components in view
-type HomeLayout struct {
+// Layout return information regarding the general display order of different components in view
+type Layout struct {
 	Alignment    string          `json:"alignment"`
 	Order        OrderMap        `json:"order_map"`
 	ComponentIDs []ComponentType `json:"components_ids"`

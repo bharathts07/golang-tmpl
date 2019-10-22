@@ -8,6 +8,6 @@ type Welcome struct {
 
 // Home contains the layout and an ordered list of  components to be displayed
 type Home struct {
-	Layout     HomeLayout  `json:"home_layout"`
+	Layout     Layout      `json:"layout"`
 	Components []Component `json:"components"`
 }
