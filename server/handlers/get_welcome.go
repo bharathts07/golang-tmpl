@@ -1,14 +1,14 @@
 package handlers
 
 import (
-	"github.com/bharathts07/pokke/internal/models"
 	"github.com/gin-gonic/gin"
+
+	"github.com/bharathts07/pokke/internal/models"
+	"github.com/bharathts07/pokke/server/middleware"
 )
 
-func GetWelcome(c *gin.Context) {
-	data := models.Welcome{
-		Message: "ようこそう",
-		Home:    "https://0.0.0.0:8080/home",
-	}
+func GetWelcomeComponents(c *gin.Context) {
+	db := middleware.GetDB(c)
+	data,_ := db.GetComponents(c,"welcome",[]models.ComponentType{})
 	c.JSON(200, data)
 }

@@ -8,6 +8,6 @@ import (
 
 // Client specifies the required methods to be implemented
 type Client interface {
-	GetLayout(ctx context.Context, view string) (models.Layout,error)
-	GetComponents(ctx context.Context, view string) ([]models.Component,error)
+	GetLayout(ctx context.Context, view string) (*models.Layout,error)
+	GetComponents(ctx context.Context, view string, components []models.ComponentType) ([]models.Component,error)
 }
