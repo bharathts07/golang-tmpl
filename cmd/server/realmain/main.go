@@ -1,6 +1,7 @@
 package realmain
 
 import (
+	"github.com/bharathts07/pokke/database/fakedb"
 	"github.com/bharathts07/pokke/server/http"
 )
 
@@ -13,11 +14,9 @@ const (
 
 // Execute contains the implementation and logic for the server. It returns an exit code indicating exit status
 func Execute(_ []string) int {
-	//r := gin.Default()
-	http.StartServer()
-	//err := r.Run() // listen and serve on 0.0.0.0:8080
-	//if err != nil {
-	//	return exitError
-	//}
+	// get reference to a database from which to retrieve the data
+	db := fakedb.New()
+	// start the http server to begin serving backend requests
+	http.StartServer(db)
 	return exitOK
 }
