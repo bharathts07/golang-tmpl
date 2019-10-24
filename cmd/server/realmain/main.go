@@ -32,7 +32,7 @@ func Execute() int {
 	// Create a DI container that simplifies
 	container := di.NewContainer(ctx, nil)
 	// address is the address at which the server listens
-	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort)
+	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort())
 	// Create http server with the required configurations
 	httpServer := container.InjectHttpServer(address)
 
