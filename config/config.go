@@ -35,3 +35,12 @@ func ReadFromEnv() (*Env, error) {
 	}
 	return &env, nil
 }
+
+func GetPort() string {
+	var port = os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return port
+}
