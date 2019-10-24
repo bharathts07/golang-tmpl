@@ -2,8 +2,8 @@ package di
 
 import (
 	"context"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
 	"github.com/bharathts07/pokke/config"
@@ -16,7 +16,7 @@ type Container struct {
 
 	Cache struct {
 		Logger *zap.Logger
-		HttpRouter *gin.Engine
+		HttpRouter *http.Server
 		Database database.Client
 	}
 }

@@ -17,6 +17,7 @@ func (c *Container) InjectLogger() *zap.Logger {
 			panic(err)
 		}
 		c.Cache.Logger = logger
+		defer logger.Sync()
 	}
 	return c.Cache.Logger
 }

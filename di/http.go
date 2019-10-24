@@ -1,15 +1,19 @@
 package di
 
 import (
-	"github.com/gin-gonic/gin"
+	"net/http"
 
-	"github.com/bharathts07/pokke/server/http"
+	http2 "github.com/bharathts07/pokke/server/http"
 )
 
-func (c *Container) InjectHttpGinRouter() *gin.Engine {
+func (c *Container) InjectHttpServer(address string) *http.Server {
 	if c.Cache.HttpRouter == nil {
-		router := http.CreateRouter(c.Cache.Database)
-		c.Cache.HttpRouter = router
+		router := http2.CreateRouter(c.Cache.Database)
+		server := &http.Server{
+			Addr:    address,
+			Handler: router,
+		}
+		c.Cache.HttpRouter = server
 	}
 	return c.Cache.HttpRouter
 }
