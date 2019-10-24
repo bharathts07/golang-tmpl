@@ -11,9 +11,9 @@ func (db implementation) GetLayout(ctx context.Context, view string) (*models.La
 	switch view {
 	case "welcome":
 		layout := models.Layout{
-			Alignment:    "center",
-			Order:        models.OrderMap{
-				Blocks:[]int{
+			Alignment: "center",
+			Order: models.OrderMap{
+				Blocks: []int{
 					1,
 				},
 			},
@@ -21,12 +21,12 @@ func (db implementation) GetLayout(ctx context.Context, view string) (*models.La
 				models.Body,
 			},
 		}
-		return &layout,nil
+		return &layout, nil
 	case "home":
 		layout := models.Layout{
-			Alignment:"center",
-			Order:models.OrderMap{
-				Blocks: []int{1,1,1,1},
+			Alignment: "center",
+			Order: models.OrderMap{
+				Blocks: []int{1, 1, 1, 1},
 			},
 			ComponentIDs: []models.ComponentType{
 				models.Banner,
@@ -35,7 +35,7 @@ func (db implementation) GetLayout(ctx context.Context, view string) (*models.La
 				models.Footer,
 			},
 		}
-		return &layout,nil
+		return &layout, nil
 	case "contact":
 	}
 	return nil, errors.New("invalid view")

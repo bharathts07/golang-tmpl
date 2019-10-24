@@ -11,13 +11,13 @@ import (
 )
 
 type Container struct {
-	Env    *config.Env
-	Ctx    context.Context
+	Env *config.Env
+	Ctx context.Context
 
 	Cache struct {
-		Logger *zap.Logger
+		Logger     *zap.Logger
 		HttpRouter *http.Server
-		Database database.Client
+		Database   database.Client
 	}
 }
 

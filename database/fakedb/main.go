@@ -8,6 +8,5 @@ type implementation struct {
 }
 
 func New() database.Client {
-	return &implementation{
-	}
+	return &implementation{}
 }

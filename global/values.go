@@ -1,5 +1,5 @@
 package global
 
-const(
+const (
 	ContextDBName string = "component"
 )

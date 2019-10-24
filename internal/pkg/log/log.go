@@ -24,4 +24,3 @@ func New(level string) (*zap.Logger, error) {
 func NewDiscard() *zap.Logger {
 	return zap.NewNop()
 }
-
