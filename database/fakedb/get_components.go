@@ -13,14 +13,14 @@ func (db implementation) GetComponents(ctx context.Context,
 	case "welcome":
 		components := []models.Component{
 			{
-				Type:models.Body,
-				Data:models.Welcome{
+				Type: models.Body,
+				Data: models.Welcome{
 					Message: "ようこそう",
 					Home:    "https://0.0.0.0:8080/home",
 				},
 			},
 		}
-		return components,nil
+		return components, nil
 	case "home":
 	case "contact":
 	}

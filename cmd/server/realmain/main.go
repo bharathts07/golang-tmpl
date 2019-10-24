@@ -21,16 +21,18 @@ const (
 )
 
 // Execute contains the implementation and logic for the server. It returns an exit code indicating exit status
-func Execute(_ []string) int {
+func Execute() int {
+	_, _ = fmt.Fprint(os.Stdout, "[INFO] Beginning Execution")
 	// Context for server
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	// Parse environment variables here
-	env , _ := config.ReadFromEnv()
+	env, _ := config.ReadFromEnv()
+	_, _ = fmt.Fprint(os.Stdout, "[INFO] Creating container")
 	// Create a DI container that simplifies
-	container := di.NewContainer(ctx,env)
+	container := di.NewContainer(ctx, env)
 	// address is the address at which the server listens
-	address := fmt.Sprintf("%s:%s","0.0.0.0",env.HTTPPort)
+	address := fmt.Sprintf("%s:%s", "0.0.0.0", env.HTTPPort)
 	// Create http server with the required configurations
 	httpServer := container.InjectHttpServer(address)
 

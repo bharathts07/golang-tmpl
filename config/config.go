@@ -24,6 +24,7 @@ type Env struct {
 // ReadFromEnv reads configuration from environmental variables
 // defined by Env struct.
 func ReadFromEnv() (*Env, error) {
+	_, _ = fmt.Fprint(os.Stdout, "[DEBUG] Beginning to parse ENV ")
 	var env Env
 	if err := envconfig.Process("", &env); err != nil {
 		return nil, errors.Wrap(err, "failed to process envconfig")

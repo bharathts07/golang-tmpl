@@ -16,6 +16,6 @@ var version string
 var serviceName string
 
 func main() {
-	_, _ = fmt.Fprintf(os.Stdout, "[INFO] Starting service %s at git commit %s:\n", serviceName, version)
-	os.Exit(realmain.Execute(os.Args))
+	_, _ = fmt.Fprintf(os.Stdout, "[INFO] Starting service ")
+	os.Exit(realmain.Execute())
 }

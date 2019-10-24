@@ -9,6 +9,6 @@ import (
 
 func GetWelcomeComponents(c *gin.Context) {
 	db := middleware.GetDB(c)
-	data,_ := db.GetComponents(c,"welcome",[]models.ComponentType{})
+	data, _ := db.GetComponents(c, "welcome", []models.ComponentType{})
 	c.JSON(200, data)
 }
