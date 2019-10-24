@@ -2,7 +2,6 @@ version: 2
 
 variables:
   - go_container: &go_container circleci/golang:1.12.5
-  - context: &context org-global
   - working_directory: &working_directory /go/src/github.com/bharathts07/pokke
   - cache_tag: &cache_tag go-mod-{{ checksum "go.sum" }}
 
@@ -105,18 +104,15 @@ workflows:
   build-test-push:
     jobs:
       - build:
-          context: *context
           <<: *all
 
       - test:
-          context: *context
           <<: *all
           requires:
             - build
 
       - build-push:
           <<: *onlymaster
-          context: *context
           requires:
             - build
             - test
