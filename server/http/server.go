@@ -17,6 +17,6 @@ func StartServer(db database.Client, env *config.Env) {
 		zap.Any("Values",env),
 		)
 
-	serverPort := "0.0.0.0:"+strconv.Itoa(env.GRPCPort)
+	serverPort := "0.0.0.0:"+strconv.Itoa(env.HTTPPort)
 	_ = router.Run(serverPort)
 }

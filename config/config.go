@@ -17,10 +17,8 @@ type Env struct {
 	LogLevel string `envconfig:"LOG_LEVEL" default:"DEBUG"`
 	// Env is used to set GIN log level
 	Env string `envconfig:"ENV" required:"true"`
-	// GRPCPort is port to listen. Default is 5000.
-	GRPCPort int `envconfig:"GRPC_PORT" default:"5000"`
 	// HTTPPort is the port at which HTTP endpoints are exposed
-	HTTPPort int `envconfig:"HTTP_PORT" default:"8080"`
+	HTTPPort int `envconfig:"PORT" default:"5000"`
 	// ServiceName used in setting parameters as ID for various monitoring tools
 	ServiceName string `envconfig:"SERVICE_NAME" default:"pokke"`
 	// Version is a version of the application binary.
