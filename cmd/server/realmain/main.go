@@ -3,12 +3,14 @@ package realmain
 import (
 	"context"
 	"fmt"
-	"github.com/bharathts07/pokke/config"
-	"github.com/bharathts07/pokke/di"
-	"golang.org/x/sync/errgroup"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"golang.org/x/sync/errgroup"
+
+	"github.com/bharathts07/pokke/config"
+	"github.com/bharathts07/pokke/di"
 )
 
 const (
@@ -47,10 +49,6 @@ func Execute(_ []string) int {
 		_, _ = fmt.Fprint(os.Stdout, "[INFO] Received SIGTERM, exiting server gracefully")
 	case <-ctx.Done():
 	}
-	if err := wg.Wait(); err != nil {
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] unhandled error received")
-		_, _ = fmt.Fprint(os.Stdout, err)
-		return exitError
-	}
+	// Remember to close all connections like db here
 	return exitOK
 }

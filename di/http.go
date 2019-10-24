@@ -8,7 +8,7 @@ import (
 
 func (c *Container) InjectHttpServer(address string) *http.Server {
 	if c.Cache.HttpRouter == nil {
-		router := http2.CreateRouter(c.Cache.Database)
+		router := http2.CreateRouter(c.InjectDatabase())
 		server := &http.Server{
 			Addr:    address,
 			Handler: router,
