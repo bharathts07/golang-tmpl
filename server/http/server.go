@@ -1,11 +1,13 @@
 package http
 
 import (
+	"strconv"
+
+	"go.uber.org/zap"
+
 	"github.com/bharathts07/pokke/config"
 	"github.com/bharathts07/pokke/database"
 	log2 "github.com/bharathts07/pokke/internal/pkg/log"
-	"go.uber.org/zap"
-	"strconv"
 )
 
 // StartServer starts given server, supporting graceful shutdown of the server
