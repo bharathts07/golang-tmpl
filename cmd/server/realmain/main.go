@@ -22,13 +22,13 @@ const (
 
 // Execute contains the implementation and logic for the server. It returns an exit code indicating exit status
 func Execute() int {
-	_, _ = fmt.Fprint(os.Stdout, "[INFO] Beginning Execution")
+	_, _ = fmt.Fprint(os.Stdout, "[INFO] Beginning Execution\n")
 	// Context for server
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	// Parse environment variables here
 	env, _ := config.ReadFromEnv()
-	_, _ = fmt.Fprint(os.Stdout, "[INFO] Creating container")
+	_, _ = fmt.Fprint(os.Stdout, "[INFO] Creating container\n")
 	// Create a DI container that simplifies
 	container := di.NewContainer(ctx, env)
 	// address is the address at which the server listens
@@ -38,6 +38,7 @@ func Execute() int {
 
 	wg, ctx := errgroup.WithContext(ctx)
 	wg.Go(func() error {
+		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address)
 		return httpServer.ListenAndServe()
 	})
 	// Waiting for SIGTERM or Interrupt signal. If server receives them,
@@ -48,7 +49,7 @@ func Execute() int {
 	signal.Notify(sigCh, syscall.SIGTERM, os.Interrupt)
 	select {
 	case <-sigCh:
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] Received SIGTERM, exiting server gracefully")
+		_, _ = fmt.Fprint(os.Stdout, "[INFO] Received SIGTERM, exiting server gracefully\n")
 	case <-ctx.Done():
 	}
 	// Remember to close all connections like db here

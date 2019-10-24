@@ -16,6 +16,6 @@ var version string
 var serviceName string
 
 func main() {
-	_, _ = fmt.Fprintf(os.Stdout, "[INFO] Starting service ")
+	_, _ = fmt.Fprintf(os.Stdout, "[INFO] Starting service\n")
 	os.Exit(realmain.Execute())
 }
