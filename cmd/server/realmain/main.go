@@ -10,7 +10,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/bharathts07/pokke/config"
-	"github.com/bharathts07/pokke/di"
+	"github.com/bharathts07/pokke/internal/di"
 )
 
 const (

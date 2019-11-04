@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
-	"github.com/bharathts07/pokke/service/joke"
+	"github.com/bharathts07/pokke/internal/service/joke"
 	"github.com/bharathts07/pokke/transport/http/gin-server/handlers"
 )
 
@@ -12,7 +12,7 @@ import (
 func setupRoutes(router *gin.Engine) {
 
 	router.GET("/", handlers.GetRoot)
-	router.Use(static.Serve("/static/", static.LocalFile("./assets/views/js", true)))
+	router.Use(static.Serve("/static/", static.LocalFile("./web/app/views/js", true)))
 	// api groups is responsible for serving data only
 	api := router.Group("/api")
 	{
@@ -31,7 +31,7 @@ func setupRoutes(router *gin.Engine) {
 
 // CreateRouter creates and configures a server
 func CreateRouter() *gin.Engine {
-	router := gin.Default()
+	router := gin.New()
 	router.Use(
 	// Add MiddleWares here if needed
 	)

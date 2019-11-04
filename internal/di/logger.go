@@ -6,7 +6,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/bharathts07/pokke/internal/pkg/log"
+	"github.com/bharathts07/pokke/pkg/log"
 )
 
 func (c *Container) InjectLogger() *zap.Logger {

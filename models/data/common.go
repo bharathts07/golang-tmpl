@@ -1,4 +1,4 @@
-package models
+package data
 
 // Image holds information for a single image component in view
 type Image struct {

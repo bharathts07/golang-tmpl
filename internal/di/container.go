@@ -7,7 +7,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/bharathts07/pokke/config"
-	"github.com/bharathts07/pokke/database"
+	"github.com/bharathts07/pokke/models/database"
 )
 
 type Container struct {

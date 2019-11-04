@@ -1,3 +1,3 @@
-## ASSETS
+## `/assets`
 
-This directory contains all the static content to be served by the server
+Static files that are meant for use in display of this repository should be placed here

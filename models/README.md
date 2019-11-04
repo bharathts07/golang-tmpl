@@ -1,3 +1,3 @@
-## models
+## `/models`
 
-This package hold the data-structures used for communication between various layers
+This directory holds packages requires for data storage and communication between various layers.

@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/bharathts07/pokke/service/joke"
+	"github.com/bharathts07/pokke/internal/service/joke"
 )
 
 // Joke is a struct that holds dependencies the needed by the handler.

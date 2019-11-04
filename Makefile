@@ -26,10 +26,10 @@ test: unit-test
 unit-test:
 	@go test -count=1 -race -v $(shell go list ./...)
 
-.PHONY: mockgenerate
-mockgenerate:
-	@echo "Generating mock for HomeData update service"
-	mockgen -source=./database/interface.go -destination=./database/mock.go --package=database
+# .PHONY: mockgenerate
+# mockgenerate:
+# 	@echo "Generating mock for HomeData update service"
+# 	mockgen -source=./database/interface.go -destination=./database/mock.go --package=database
 
 # GITHUB_TOKEN needed if the image needs to be pulled from a private repository
 .PHONY: container
@@ -38,7 +38,7 @@ container:
 		--build-arg GITHUB_TOKEN=$(GITHUB_TOKEN) \
 		--build-arg VERSION=$(VERSION) \
 		--build-arg SERVICE_NAME=$(SERVICE_NAME) \
-		--file docker/server/Dockerfile \
+		--file build/docker/server/Dockerfile \
 		.
 
 # This requires `docker login`
