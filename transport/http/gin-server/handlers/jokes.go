@@ -2,22 +2,40 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/bharathts07/pokke/service/joke"
 )
 
+type Joke struct {
+	Service joke.Service
+}
+
 // JokeHandler retrieves a list of available jokes
-func JokeHandler(c *gin.Context) {
+func (j Joke) JokeHandler(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Jokes handler not implemented yet",
-	})
+	val, err := j.Service.GetJokes(c)
+	if err != nil {
+		c.JSON(http.StatusNotImplemented, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, val)
 }
 
 // LikeJoke increments the likes of a particular joke Item
-func LikeJoke(c *gin.Context) {
+func (j *Joke) LikeJoke(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
-	c.JSON(http.StatusOK, gin.H{
-		"message": "LikeJoke handler not implemented yet",
-	})
+	jokeid, err := strconv.Atoi(c.Param("jokeID"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	val, err := j.Service.LikeJokes(c, strconv.Itoa(jokeid))
+	if err != nil {
+		c.JSON(http.StatusNotImplemented, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, val)
 }

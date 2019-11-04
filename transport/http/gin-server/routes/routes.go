@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
+	"github.com/bharathts07/pokke/service/joke"
 	"github.com/bharathts07/pokke/transport/http/gin-server/handlers"
 )
 
@@ -18,8 +19,11 @@ func setupRoutes(router *gin.Engine) {
 		// version v1 for later deprecation  &/or replacement
 		v1 := api.Group("/v1")
 		{
-			v1.GET("/jokes", handlers.JokeHandler)
-			v1.POST("/jokes/like/:jokeID", handlers.LikeJoke)
+			// joke service related api calls
+			//---------------------------------------------------
+			jokeSvc := handlers.Joke{Service: joke.New()}
+			v1.GET("/jokes", jokeSvc.JokeHandler)
+			v1.POST("/jokes/like/:jokeID", jokeSvc.LikeJoke)
 		}
 	}
 

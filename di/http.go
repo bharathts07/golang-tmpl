@@ -8,7 +8,7 @@ import (
 
 func (c *Container) InjectHttpServer(address string) *http.Server {
 	if c.Cache.HttpRouter == nil {
-		server := gin_server.Start(address, c.InjectDatabase())
+		server := gin_server.Start(address)
 		c.Cache.HttpRouter = server
 	}
 	return c.Cache.HttpRouter
