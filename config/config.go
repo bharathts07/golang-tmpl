@@ -40,8 +40,8 @@ func GetPort() string {
 	var port = os.Getenv("PORT")
 	if port == "" {
 		port = "5000"
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] No PORT environment variable detected, defaulting to " + port)
+		_, _ = fmt.Fprint(os.Stdout, "[INFO] No PORT environment variable detected, defaulting to "+port+"\n")
 	}
-	_, _ = fmt.Fprint(os.Stdout, "[INFO] Selected port is  " + port)
+	_, _ = fmt.Fprint(os.Stdout, "[INFO] Selected port is: "+port+"\n")
 	return port
 }

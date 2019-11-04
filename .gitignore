@@ -14,4 +14,4 @@
 
 ## Ignore directories containing credentials, binaries, etc
 bin/
-creds/
+keys/
