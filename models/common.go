@@ -6,3 +6,9 @@ type Image struct {
 	URL     string `json:"url"`
 	Caption string `json:"caption"`
 }
+
+// TextBlock defines a block of text along with the title
+type TextBlock struct {
+	Title string `json:"title"`
+	Text  string `json:"body"`
+}

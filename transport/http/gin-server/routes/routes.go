@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
-	"github.com/bharathts07/pokke/database"
 	"github.com/bharathts07/pokke/transport/http/gin-server/handlers"
 )
 
@@ -27,7 +26,7 @@ func setupRoutes(router *gin.Engine) {
 }
 
 // CreateRouter creates and configures a server
-func CreateRouter(db database.Client) *gin.Engine {
+func CreateRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(
 	// Add MiddleWares here if needed

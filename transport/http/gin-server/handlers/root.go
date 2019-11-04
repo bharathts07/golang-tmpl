@@ -5,17 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/bharathts07/pokke/internal/models"
+	"github.com/bharathts07/pokke/models"
 )
 
 func GetRoot(c *gin.Context) {
-	data := []models.Component{
+	data := []models.TextBlock{
 		{
-			Type: models.Body,
-			Data: models.Welcome{
-				Message: "ようこそう",
-				Home:    "https://0.0.0.0:8080/home",
-			},
+			Title: "ようこそう",
+			Text:  "You have reached the home page",
 		},
 	}
 	c.JSON(http.StatusOK, data)
