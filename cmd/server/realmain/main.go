@@ -38,7 +38,7 @@ func Execute() int {
 
 	wg, ctx := errgroup.WithContext(ctx)
 	wg.Go(func() error {
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address)
+		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address,"\n")
 		return httpServer.ListenAndServe()
 	})
 	// Waiting for SIGTERM or Interrupt signal. If server receives them,
@@ -49,7 +49,7 @@ func Execute() int {
 	signal.Notify(sigCh, syscall.SIGTERM, os.Interrupt)
 	select {
 	case <-sigCh:
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] Received SIGTERM, exiting server gracefully\n")
+		_, _ = fmt.Fprint(os.Stdout, "\n[INFO] Received SIGTERM, exiting server gracefully\n")
 	case <-ctx.Done():
 	}
 	// Remember to close all connections like db here
