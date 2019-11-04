@@ -9,6 +9,8 @@ import (
 	"github.com/bharathts07/pokke/service/joke"
 )
 
+// Joke is a struct that holds dependencies the needed by the handler.
+// REF: https://github.com/gin-gonic/gin/issues/932#issuecomment-306242400
 type Joke struct {
 	Service joke.Service
 }

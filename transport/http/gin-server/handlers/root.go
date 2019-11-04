@@ -8,6 +8,8 @@ import (
 	"github.com/bharathts07/pokke/models"
 )
 
+// GetRoot prints a json content when the root address is clicked
+// TODO : To be fixed in the future, to display a web page
 func GetRoot(c *gin.Context) {
 	data := []models.TextBlock{
 		{
