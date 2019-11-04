@@ -1,3 +1,3 @@
-## ASSETS
+## `/app`
 
-This directory contains all the static content to be served by the server
+This directory contains static/dynamic content specific to a site to be served by the server

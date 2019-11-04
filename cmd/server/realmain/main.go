@@ -38,7 +38,7 @@ func Execute() int {
 
 	wg, ctx := errgroup.WithContext(ctx)
 	wg.Go(func() error {
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address,"\n")
+		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address, "\n")
 		return httpServer.ListenAndServe()
 	})
 	// Waiting for SIGTERM or Interrupt signal. If server receives them,

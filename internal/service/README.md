@@ -1,3 +1,3 @@
 ## `/service`
 
-This layer contains the business logic for various services
+This layer contains separate packages each containing the `business logic` for that service.
