@@ -1,4 +1,4 @@
-FROM golang:1.12.5
+FROM golang:1.13
 
 ARG GITHUB_TOKEN
 ARG SERVICE_NAME
@@ -6,13 +6,15 @@ ARG VERSION
 
 WORKDIR /tmp/${SERVICE_NAME}
 
-COPY . ./
-
 COPY go.* ./
 
-RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go install -v \
-	-ldflags="-w -s -X main.version=${VERSION} -X main.serviceName=${SERVICE_NAME}" \
-	./cmd/server
+RUN go mod download
+
+COPY . ./
+
+RUN CGO_ENABLED=0 GOOS=linux go install -v \
+            -ldflags="-w -s -X main.version=${VERSION} -X main.serviceName=${SERVICE_NAME}" \
+            ./cmd/server
 
 FROM alpine:latest
 
