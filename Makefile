@@ -3,7 +3,6 @@ VERSION ?= commit-$(GIT_REF)
 
 SERVICE_NAME := $(shell grep "^module" go.mod | rev | cut -d "/" -f1 | rev)
 
-
 GCR_PROJECT := pokke
 REGISTRY := gcr.io/$(GCR_PROJECT)
 # For use in cloudbuild if necessary
@@ -49,6 +48,15 @@ push-container:
 .PHONY: dependencies
 dependencies:
 	@go mod tidy
+
+.PHONY: lint
+lint:
+	golangci-lint run $(args) ./...
+	go-consistent $(cons_args) ./...
+
+.PHONY: lint-fix
+lint-fix:
+	@make lint args='--fix -v' cons_args='-v'
 
 .PHONY: coverage
 coverage:
