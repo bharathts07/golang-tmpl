@@ -20,27 +20,51 @@ const (
 	exitError
 )
 
-// Execute contains the implementation and logic for the server. It returns an exit code indicating exit status
+// Execute is start point of service. We initialize required client
+// (DB or external services) and logger and pass it to the server struct.
+// The main steps are as follows :
+//	1. Read environment variables
+//  2. Initialize DI Container
+//  3. Inject dependencies
+//  4. Inject required servers
+//  5. Start listening on separate goroutines
+//  6. Handle graceful shutdown
+//nolint:funlen // too large and doesn't contain any business logic
 func Execute() int {
 	_, _ = fmt.Fprint(os.Stdout, "[INFO] Beginning Execution\n")
-	// Context for server
+	//	1. Read environment variables
+	// -----------------------------------------------------------------------------------------------------
+	env, err := config.ReadFromEnv()
+	if err != nil {
+		_, _ = fmt.Fprint(os.Stdout, "[ERROR] Reading ENV variables\n")
+		return exitError
+	}
+	//  2. Initialize DI Container
+	// -----------------------------------------------------------------------------------------------------
+	// Context for container
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// Parse environment variables here
-	//env, _ := config.ReadFromEnv()
+
 	_, _ = fmt.Fprint(os.Stdout, "[INFO] Creating container\n")
-	// Create a DI container that simplifies
-	container := di.NewContainer(ctx, nil)
+	// Create a DI container
+	container := di.NewContainer(ctx, env)
+	//  3. Inject dependencies
+	// -----------------------------------------------------------------------------------------------------
+	//  4. Inject required servers
+	// -----------------------------------------------------------------------------------------------------
 	// address is the address at which the server listens
 	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort())
 	// Create http server with the required configurations
-	httpServer := container.InjectHttpServer(address)
-
+	httpServer := container.GetHTTPServer(address)
+	//  5. Start listening on separate goroutines
+	// -----------------------------------------------------------------------------------------------------
 	wg, ctx := errgroup.WithContext(ctx)
 	wg.Go(func() error {
 		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address, "\n")
 		return httpServer.ListenAndServe()
 	})
+	//  6. Handle graceful shutdown
+	// -----------------------------------------------------------------------------------------------------
 	// Waiting for SIGTERM or Interrupt signal. If server receives them,
 	// gRPC server and http server will shutdown gracefully.
 	// Waiting for SIGTERM or Interrupt signal. If server receives them,

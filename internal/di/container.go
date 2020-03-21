@@ -16,7 +16,7 @@ type Container struct {
 
 	Cache struct {
 		Logger     *zap.Logger
-		HttpRouter *http.Server
+		HTTPRouter *http.Server
 		Database   database.Client
 	}
 }

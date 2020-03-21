@@ -3,13 +3,13 @@ package di
 import (
 	"net/http"
 
-	"github.com/bharathts07/pokke/transport/http/gin-server"
+	"github.com/bharathts07/pokke/transport/http/gin"
 )
 
-func (c *Container) InjectHttpServer(address string) *http.Server {
-	if c.Cache.HttpRouter == nil {
-		server := gin_server.Start(address)
-		c.Cache.HttpRouter = server
+func (c *Container) GetHTTPServer(address string) *http.Server {
+	if c.Cache.HTTPRouter == nil {
+		server := gin.Start(address)
+		c.Cache.HTTPRouter = server
 	}
-	return c.Cache.HttpRouter
+	return c.Cache.HTTPRouter
 }

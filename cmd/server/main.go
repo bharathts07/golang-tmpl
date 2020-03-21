@@ -9,10 +9,12 @@ import (
 
 // version is git commit at the time of build of this service binary. version is overwritten by -ldflags
 // while building.
+//nolint:varcheck,deadcode,unused // will be later used for logging
 var version string
 
 // serviceName is service name of this microservices. serviceName
 // is overwritten using -ldflags while building.
+//nolint:varcheck,deadcode,unused // will be later used for logging
 var serviceName string
 
 func main() {
