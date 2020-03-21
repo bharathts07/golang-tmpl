@@ -52,10 +52,8 @@ func Execute() int {
 	// -----------------------------------------------------------------------------------------------------
 	//  4. Inject required servers
 	// -----------------------------------------------------------------------------------------------------
-	// address is the address at which the server listens
-	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort())
 	// Create http server with the required configurations
-	httpServer := container.GetHTTPServer(address)
+	httpServer := container.GetHTTPServer()
 	//  5. Start listening on separate goroutines
 	// -----------------------------------------------------------------------------------------------------
 	wg, ctx := errgroup.WithContext(ctx)

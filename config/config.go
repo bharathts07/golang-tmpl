@@ -18,7 +18,15 @@ type Env struct {
 	// ServiceName used in setting parameters as ID for various monitoring tools
 	ServiceName string `envconfig:"SERVICE_NAME" default:"pokke"`
 	// Version is a version of the application binary.
-	Version string
+	Version string `envconfig:"VERSION"`
+	// --------------------------------------------------------------------------------------------
+	// MongoConf holds config information for connecting to a mongo database
+	MongoConf struct {
+		// User is the username for connecting to the mongo database
+		User string `envconfig:"MONGO_USER" default:"pokke"`
+		// Password is the password for authenticating the connection to the mongo database
+		Password string `envconfig:"MONGO_PASS" required:"true"`
+	}
 }
 
 // ReadFromEnv reads configuration from environmental variables
