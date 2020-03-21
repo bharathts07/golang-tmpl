@@ -1,7 +1,7 @@
 version: 2
 
 variables:
-  - go_container: &go_container circleci/golang:1.12.5
+  - go_container: &go_container circleci/golang:1.13
   - working_directory: &working_directory /go/src/github.com/bharathts07/pokke
   - cache_tag: &cache_tag go-mod-{{ checksum "go.sum" }}
 
@@ -26,15 +26,11 @@ golang: &golang
   <<: *defaults
   docker:
     - image: *go_container
-      environment:
-        GO111MODULE: "on"
 
 golang_test: &golang_test
   <<: *defaults
   docker:
     - image: *go_container
-      environment:
-        GO111MODULE: "on"
     # multiple container images on common network can be added here
 
 netrc: &netrc
