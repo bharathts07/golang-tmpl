@@ -17,7 +17,7 @@ type Blog struct {
 func (h Blog) GetAll(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	// parse the limit
-	blogTitle, err := strconv.Atoi(c.Param("blogLimit"))
+	blogTitle, err := strconv.Atoi(c.Param("limit"))
 	if err != nil {
 		blogTitle = 10
 	}
@@ -33,7 +33,7 @@ func (h Blog) GetAll(c *gin.Context) {
 func (h Blog) GetBlog(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	// parse the request
-	blogTitle := c.Param("blogTitle")
+	blogTitle := c.Param("title")
 	val, err := h.Service.ReadBlog(c, blogTitle)
 	if err != nil {
 		c.JSON(http.StatusNotImplemented, err.Error())

@@ -18,7 +18,7 @@ type Env struct {
 	// ServiceName used in setting parameters as ID for various monitoring tools
 	ServiceName string `envconfig:"SERVICE_NAME" required:"true"`
 	// Version is a version of the application binary.
-	Version string `envconfig:"VERSION" required:"true"`
+	Version string `envconfig:"VERSION"`
 	// --------------------------------------------------------------------------------------------
 	// BlogDBType holds information regarding the type for database to be used
 	BlogDBType string `envconfig:"BLOG_DB_TYPE" required:"true"`
