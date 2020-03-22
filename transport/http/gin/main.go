@@ -1,9 +1,9 @@
-package gin_server
+package gin
 
 import (
 	"net/http"
 
-	"github.com/bharathts07/pokke/transport/http/gin-server/routes"
+	"github.com/bharathts07/pokke/transport/http/gin/routes"
 )
 
 // Start creates and starts a gin http server at the address specified

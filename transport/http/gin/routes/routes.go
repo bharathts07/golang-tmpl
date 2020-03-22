@@ -5,12 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/bharathts07/pokke/internal/service/joke"
-	"github.com/bharathts07/pokke/transport/http/gin-server/handlers"
+	"github.com/bharathts07/pokke/transport/http/gin/handlers"
 )
 
 // setupRoutes defines all the rest API endpoints served by this server
 func setupRoutes(router *gin.Engine) {
-
 	router.GET("/", handlers.GetRoot)
 	router.Use(static.Serve("/static/", static.LocalFile("./web/app/views/js", true)))
 	// api groups is responsible for serving data only
@@ -26,7 +25,6 @@ func setupRoutes(router *gin.Engine) {
 			v1.POST("/jokes/like/:jokeID", jokeSvc.LikeJoke)
 		}
 	}
-
 }
 
 // CreateRouter creates and configures a server
