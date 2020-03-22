@@ -7,7 +7,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func NewClient(ctx context.Context, projectID string, cred string) (*firestore.Client, error) {
+func NewClient(ctx context.Context, projectID, cred string) (*firestore.Client, error) {
 	client, err := firestore.NewClient(
 		ctx,
 		projectID,

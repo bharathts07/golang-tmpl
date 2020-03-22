@@ -1,8 +1,9 @@
 package fire
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
+
+	"cloud.google.com/go/firestore"
 	"google.golang.org/api/iterator"
 
 	"github.com/bharathts07/pokke/internal/database/blog/model"
@@ -13,7 +14,8 @@ const (
 	personal = "personal"
 	blogRoot = "blog"
 
-	personalSummary   = "summary"
+	personalSummary = "summary"
+	//nolint:unused,deadcode,varcheck // will be used later
 	blogTypeTechnical = "technical"
 )
 

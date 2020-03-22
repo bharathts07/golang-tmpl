@@ -42,7 +42,7 @@ func (svc impl) SaveBlog(ctx context.Context, blogItem *model.BlogItem) error {
 	return nil
 }
 
-func (svc impl) UpdateBlog(ctx context.Context, title string, blog *model.BlogItem) error {
+func (svc impl) UpdateBlog(ctx context.Context, title string, b *model.BlogItem) error {
 	panic("implement me")
 }
 

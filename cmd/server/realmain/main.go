@@ -55,6 +55,11 @@ func Execute() int {
 	// defer func() {
 	// _ = mongoClient.Disconnect(container.Ctx)
 	//} ()
+	fClient := container.GetFireStoreClient()
+	defer func() {
+		_ = fClient.Close()
+	}()
+
 	// 4. Inject required servers
 	// -----------------------------------------------------------------------------------------------------
 	// Create http server with the required configurations
