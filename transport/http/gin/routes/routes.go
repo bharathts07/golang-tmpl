@@ -6,8 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 
 	blogstore "github.com/bharathts07/pokke/internal/database/blog"
-	"github.com/bharathts07/pokke/internal/service/blog"
-	"github.com/bharathts07/pokke/internal/service/joke"
 	"github.com/bharathts07/pokke/transport/http/gin/handlers"
 )
 
@@ -25,19 +23,10 @@ func setupRoutes(router *gin.Engine,
 		{
 			// joke service related api calls
 			// ---------------------------------------------------------------------------------------------------
-			jokeHandler := handlers.Joke{Service: joke.New()}
-			v1.GET("/jokes", jokeHandler.GetAll)
-			v1.POST("/jokes/like/:jokeID", jokeHandler.LikeJoke)
-
+			getJokesRouterGroup(v1)
 			// blog service related api calls
 			// ---------------------------------------------------------------------------------------------------
-			blogGroup := v1.Group("/blog")
-			{
-				blogHandler := handlers.Blog{Service: blog.NewService(blogdb)}
-				blogGroup.GET("/personal", blogHandler.GetAll)
-				blogGroup.GET("/personal/:title", blogHandler.GetBlog)
-				blogGroup.POST("/personal/:title", blogHandler.PostBlog)
-			}
+			getBlogRouterGroup(v1, blogdb)
 		}
 	}
 }
