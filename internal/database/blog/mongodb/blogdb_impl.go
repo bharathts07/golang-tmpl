@@ -6,7 +6,7 @@ import (
 	"github.com/bharathts07/pokke/internal/database/blog/model"
 )
 
-func (d db) GetBlogSummary(ctx context.Context) ([]*model.BlogPreview, error) {
+func (d db) GetBlogSummary(ctx context.Context, limit int) ([]*model.BlogPreview, error) {
 	panic("implement me")
 }
 

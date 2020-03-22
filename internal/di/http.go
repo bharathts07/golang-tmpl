@@ -18,7 +18,9 @@ func (c *Container) GetHTTPServer() *http.Server {
 	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort())
 	log.Printf("[INFO] Starting http server at address : %s", address)
 
-	server := gin.Start(address)
+	db := c.GetBlogDB()
+
+	server := gin.Start(address, db)
 
 	c.cache.hTTPServer = server
 

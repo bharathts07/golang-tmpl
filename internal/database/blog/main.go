@@ -8,7 +8,7 @@ import (
 
 type DB interface {
 	// For front page display
-	GetBlogSummary(ctx context.Context) ([]*model.BlogPreview, error)
+	GetBlogSummary(ctx context.Context, limit int) ([]*model.BlogPreview, error)
 	// Main operations
 	GetBlog(ctx context.Context, title string) (*model.BlogItem, error)
 	PostBlog(ctx context.Context, item *model.BlogItem) error

@@ -15,8 +15,8 @@ type Joke struct {
 	Service joke.Service
 }
 
-// JokeHandler retrieves a list of available jokes
-func (j Joke) JokeHandler(c *gin.Context) {
+// GetAll retrieves a list of available jokes
+func (j Joke) GetAll(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 	val, err := j.Service.GetJokes(c)
 	if err != nil {

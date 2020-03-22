@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"cloud.google.com/go/firestore"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 
@@ -22,7 +23,8 @@ type Container struct {
 		logger     *zap.Logger
 		hTTPServer *http.Server
 		// database for blog management
-		mongoDB *mongo.Client
+		mongoDB    *mongo.Client
+		fireClient *firestore.Client
 
 		// business specific dependencies constructed locally
 		database database.Client
