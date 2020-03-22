@@ -10,22 +10,20 @@ import (
 
 type Env struct {
 	// LogLevel is INFO or DEBUG. Default is "INFO".
-	LogLevel string `envconfig:"LOG_LEVEL" default:"DEBUG"`
+	LogLevel string `envconfig:"LOG_LEVEL"`
 	// Env is used to set GIN log level
 	Env string `envconfig:"ENV" required:"true"`
 	// HTTPPort is the port at which HTTP endpoints are exposed
-	HTTPPort string `envconfig:"PORT" default:"5000"`
+	HTTPPort string `envconfig:"HTTP_PORT" default:"5000"`
 	// ServiceName used in setting parameters as ID for various monitoring tools
 	ServiceName string `envconfig:"SERVICE_NAME" default:"pokke"`
 	// Version is a version of the application binary.
 	Version string `envconfig:"VERSION"`
 	// --------------------------------------------------------------------------------------------
-	// MongoConf holds config information for connecting to a mongo database
-	MongoConf struct {
-		// User is the username for connecting to the mongo database
-		User string `envconfig:"MONGO_USER" default:"pokke"`
-		// Password is the password for authenticating the connection to the mongo database
-		Password string `envconfig:"MONGO_PASS" required:"true"`
+	// Mongo holds config information for connecting to a mongo database
+	Mongo struct {
+		// URL is the complete url with username and password that can be directly used to connect to mongodb
+		URL string `envconfig:"MONGO_URL" required:"true"`
 	}
 }
 

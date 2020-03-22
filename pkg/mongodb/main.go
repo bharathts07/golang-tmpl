@@ -2,7 +2,6 @@ package mongodb
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -10,17 +9,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-const (
-	AtlasURL = "mongodb+srv://%s:%s@cluster0-s4ipk.mongodb.net/test?retryWrites=true&w=majority"
-)
-
 // NewClient returns a mongoDB client after connection and checking the connection
 func NewClient(ctx context.Context,
-	user, pass string,
+	atlasURL string,
 ) (*mongo.Client, error) {
-	connectionString := fmt.Sprintf(AtlasURL, user, pass)
+	log.Printf("Connecting to mongo db at: %s\n", atlasURL)
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(connectionString))
+	client, err := mongo.NewClient(options.Client().ApplyURI(atlasURL))
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
@@ -31,6 +26,9 @@ func NewClient(ctx context.Context,
 		log.Fatal(err)
 		return nil, err
 	}
+
+	log.Printf("Checking connection to mongo db with a ping\n")
+
 	// check connection with a ping request
 	err = client.Ping(ctx, readpref.Primary())
 	if err != nil {
@@ -38,5 +36,6 @@ func NewClient(ctx context.Context,
 		return nil, err
 	}
 
+	log.Printf("PING: No error\n")
 	return client, nil
 }

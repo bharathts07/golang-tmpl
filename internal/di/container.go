@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 
 	"github.com/bharathts07/pokke/config"
@@ -17,12 +18,15 @@ type Container struct {
 	Env *config.Env
 	Ctx context.Context
 
-	Cache struct {
-		Logger     *zap.Logger
-		HTTPServer *http.Server
-		Database   database.Client
+	cache struct {
+		logger     *zap.Logger
+		hTTPServer *http.Server
 		// database for blog management
-		blogDB blog.DB
+		mongoDB *mongo.Client
+
+		// business specific dependencies constructed locally
+		database database.Client
+		blogDB   blog.DB
 	}
 }
 

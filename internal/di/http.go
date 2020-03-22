@@ -2,6 +2,7 @@ package di
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/bharathts07/pokke/config"
@@ -10,14 +11,16 @@ import (
 
 // GetHTTPServer returns a gin implementation for httpServer
 func (c *Container) GetHTTPServer() *http.Server {
-	if c.Cache.HTTPServer != nil {
-		return c.Cache.HTTPServer
+	if c.cache.hTTPServer != nil {
+		return c.cache.hTTPServer
 	}
 
 	address := fmt.Sprintf("%s:%s", "0.0.0.0", config.GetPort())
+	log.Printf("[INFO] Starting http server at address : %s", address)
+
 	server := gin.Start(address)
 
-	c.Cache.HTTPServer = server
+	c.cache.hTTPServer = server
 
-	return c.Cache.HTTPServer
+	return c.cache.hTTPServer
 }

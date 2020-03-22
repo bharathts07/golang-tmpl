@@ -48,9 +48,14 @@ func Execute() int {
 	_, _ = fmt.Fprint(os.Stdout, "[INFO] Creating container\n")
 	// Create a DI container
 	container := di.NewContainer(ctx, env)
-	//  3. Inject dependencies
+	// 3. Inject dependencies
 	// -----------------------------------------------------------------------------------------------------
-	//  4. Inject required servers
+	// try with mongo db
+	// mongoClient := container.GetMongoConnection()
+	// defer func() {
+	// _ = mongoClient.Disconnect(container.Ctx)
+	//} ()
+	// 4. Inject required servers
 	// -----------------------------------------------------------------------------------------------------
 	// Create http server with the required configurations
 	httpServer := container.GetHTTPServer()
@@ -58,7 +63,6 @@ func Execute() int {
 	// -----------------------------------------------------------------------------------------------------
 	wg, ctx := errgroup.WithContext(ctx)
 	wg.Go(func() error {
-		_, _ = fmt.Fprint(os.Stdout, "[INFO] Starting server at address\n", address, "\n")
 		return httpServer.ListenAndServe()
 	})
 	//  6. Handle graceful shutdown

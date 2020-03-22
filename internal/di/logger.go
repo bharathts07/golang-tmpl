@@ -9,14 +9,18 @@ import (
 	"github.com/bharathts07/pokke/pkg/log"
 )
 
+// GetLogger created zap Logger with the loglevel retrieved from the env config
 func (c *Container) GetLogger() *zap.Logger {
-	if c.Cache.Logger == nil {
-		logger, err := log.New("Debug")
-		if err != nil {
-			_, _ = fmt.Fprint(os.Stderr, "[ERROR] Initializing logger")
-			panic(err)
-		}
-		c.Cache.Logger = logger
+	if c.cache.logger != nil {
+		return c.cache.logger
 	}
-	return c.Cache.Logger
+	logger, err := log.New(c.Env.LogLevel)
+	if err != nil {
+		_, _ = fmt.Fprint(os.Stderr, "[ERROR] Initializing logger")
+		panic(err)
+	}
+
+	c.cache.logger = logger
+
+	return c.cache.logger
 }
