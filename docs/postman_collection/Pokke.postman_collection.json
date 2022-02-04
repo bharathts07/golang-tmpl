@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "18c50bae-ca03-48f8-98c4-73127157e3b0",
+		"name": "Pokke",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WebPageRoot",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/static/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"static",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllJokes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/jokes/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"jokes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LikeJoke",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/jokes/like/:jokeID",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"jokes",
+						"like",
+						":jokeID"
+					],
+					"variable": [
+						{
+							"key": "jokeID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllBlogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/blog/all/:limit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"all",
+						":limit"
+					],
+					"variable": [
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostBlog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"blog3\",\n    \"title\": \"test blog3\",\n    \"author\": \"me\",\n    \"body\": \"bugabugabuga\",\n    \"tags\": [\n        \"awesome\",\n        \"learning\"\n    ],\n    \"photo\": [\n        \"img1\",\n        \"img2\",\n        \"img3\"\n    ],\n    \"created\": \"2012-04-23T18:25:43.511Z\",\n    \"updated\": \"2012-04-23T18:25:43.511Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/blog/personal/:title",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"personal",
+						":title"
+					],
+					"variable": [
+						{
+							"key": "title",
+							"value": "blog3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBlog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/blog/personal/:title",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"personal",
+						":title"
+					],
+					"variable": [
+						{
+							"key": "title",
+							"value": "test blog1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -57,5 +57,5 @@ func (h Blog) PostBlog(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, blogItem.Title)
+	c.JSON(http.StatusCreated, blogItem.Title)
 }
