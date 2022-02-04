@@ -51,10 +51,10 @@ func Execute() int {
 	// 3. Inject dependencies
 	// -----------------------------------------------------------------------------------------------------
 	// try with mongo db
-	// mongoClient := container.GetMongoConnection()
-	// defer func() {
-	// _ = mongoClient.Disconnect(container.Ctx)
-	//} ()
+	mongoClient := container.GetMongoConnection()
+	defer func() {
+		_ = mongoClient.Disconnect(container.Ctx)
+	}()
 	fClient := container.GetFireStoreClient()
 	defer func() {
 		_ = fClient.Close()
