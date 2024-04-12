@@ -12,7 +12,7 @@ require (
 	github.com/rs/xid v1.2.1
 	go.mongodb.org/mongo-driver v1.3.1
 	go.uber.org/zap v1.14.0
-	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df // indirect
-	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
+	golang.org/x/crypto v0.17.0 // indirect
+	golang.org/x/sync v0.1.0
 	google.golang.org/api v0.14.0
 )
