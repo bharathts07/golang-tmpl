@@ -10,7 +10,7 @@ require (
 	github.com/klauspost/compress v1.10.3 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
-	go.mongodb.org/mongo-driver v1.3.1
+	go.mongodb.org/mongo-driver v1.5.1
 	go.uber.org/zap v1.14.0
 	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df // indirect
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
